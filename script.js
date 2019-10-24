@@ -7,25 +7,40 @@ const gif = document.querySelector("#giphyImageTag");
 const title = document.querySelector("#giphyTitleDiv");
 const trendingDiv = document.getElementById("trendingDiv");
 const searchResultsDiv = document.querySelector(".searchResults");
+const form = document.querySelector("form");
 const searchBar = document.querySelector("input");
 
-let searchRequest = "";
-
 const handleSearch = event => {
+  event.preventDefault();
+  const searchRequest = searchBar.value;
   const giphySearchEndpoint = `https://api.giphy.com/v1/gifs/search?q=${searchRequest}&api_key=2041494ca782403cb6055682a7943c75&tag=&rating=G`;
 
-  console.log(event.target.value);
+  axios({
+    url: giphySearchEndpoint,
+    method: "get"
+  }).then(response => {
+    const searchResultsArray = response.data.data;
+    console.log(searchResultsArray);
+    returnSearchImages(searchResultsArray);
+    searchBar.innerText = "";
+  });
 };
 
-const returnSearchImages = () => {};
+const returnSearchImages = searchResultsArray => {
+  searchResultsArray.forEach(result => {
+    console.log(result);
+    let imageURL = result.images.original.url;
+    let resultImage = document.createElement("img");
+    resultImage.setAttribute("src", imageURL);
+    searchResultsDiv.append(resultImage);
+  });
+};
 
-searchBar.addEventListener("submit", handleSearch);
+form.addEventListener("submit", handleSearch);
 
-const handleResponse = (url, titleText) => {
-  title.innerText = titleText;
+const handleResponse = url => {
   gif.setAttribute("src", url);
   body.append(gif);
-  body.append(title);
 };
 
 const handleClick = () => {
@@ -34,8 +49,7 @@ const handleClick = () => {
     url: giphyRandomEndpoint
   }).then(response => {
     let url = response.data.data.image_url;
-    let titleText = response.data.data.title;
-    handleResponse(url, titleText);
+    handleResponse(url);
   });
 };
 

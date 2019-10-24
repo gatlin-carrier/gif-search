@@ -20,13 +20,15 @@
     <div class="container">
       <header>
         <h1>Jiffy!</h1>
-        <input type="search" name="search" />
-        <button>Search</button>
-        <button id="getRandomGiphyButton">Random Giphy!</button>
+        <form>
+          <input id="input" type="text" />
+          <button type="submit">Search</button>
+          <button id="getRandomGiphyButton">Random Giphy!</button>
+        </form>
+
         <!-- <button id="getTrendingButton">Get A Trending Giphy!</button> -->
       </header>
       <img id="giphyImageTag" src="" alt="" />
-      <div id="giphyTitleDiv"></div>
     </div>
     <h2>Trending</h2>
     <div class="searchResults"></div>
