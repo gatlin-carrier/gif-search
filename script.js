@@ -9,6 +9,14 @@ const trendingDiv = document.getElementById("trendingDiv");
 const searchResultsDiv = document.querySelector(".searchResults");
 const form = document.querySelector("form");
 const searchBar = document.querySelector("input");
+const resultsHeader = document.querySelector(".resultsHeader");
+const imagesArray = document.querySelectorAll("img");
+
+const removeImages = () => {
+  imagesArray.forEach(image => {
+    image.parentElement.removeChild(image);
+  });
+};
 
 const handleSearch = event => {
   event.preventDefault();
@@ -20,18 +28,18 @@ const handleSearch = event => {
     method: "get"
   }).then(response => {
     const searchResultsArray = response.data.data;
-    console.log(searchResultsArray);
-    returnSearchImages(searchResultsArray);
-    searchBar.innerText = "";
+
+    returnSearchImages(searchResultsArray, searchRequest);
+    form.reset();
   });
 };
 
-const returnSearchImages = searchResultsArray => {
+const returnSearchImages = (searchResultsArray, searchRequest) => {
   searchResultsArray.forEach(result => {
-    console.log(result);
     let imageURL = result.images.original.url;
     let resultImage = document.createElement("img");
     resultImage.setAttribute("src", imageURL);
+    resultsHeader.innerText = `${searchRequest} Search Results`;
     searchResultsDiv.append(resultImage);
   });
 };

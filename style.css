@@ -12,15 +12,29 @@ body {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.h1Hr {
+  height: 5px;
+  background-color: white;
+}
+
+.h2Hr {
+  height: 2px;
+  background-color: white;
+  width: 95%;
+}
+
 h1 {
+  color: white;
   margin-top: 10%;
-  font-family: "Fascinate Inline", cursive;
+  font-family: "Montserrat", sans-serif;
   font-size: 100px;
   margin-right: 100%;
 }
 
 h2 {
-  font-family: "Fascinate Inline", cursive;
+  margin-left: 25%;
+  color: white;
+  font-family: "Montserrat", sans-serif;
   font-size: 40px;
   margin-bottom: 5%;
 }
@@ -86,8 +100,31 @@ img:hover {
   justify-content: center;
 }
 
+.remove {
+  display: none;
+}
+
 @media only screen and (max-width: 960px) {
+  .container {
+    flex-flow: column;
+    align-content: center;
+  }
+
+  h1 {
+    width: 50%;
+  }
+
+  #input {
+    margin-left: 10px;
+    width: 90%;
+  }
+
+  button {
+    margin-left: 50px;
+  }
+
   img {
+    margin-left: 90px;
     max-width: 50%;
   }
 }
