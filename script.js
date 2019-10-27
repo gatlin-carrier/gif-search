@@ -2,7 +2,6 @@ const giphyRandomEndpoint = `https://api.giphy.com/v1/gifs/random?api_key=204149
 const giphyTrendingEndpoint = `https://api.giphy.com/v1/gifs/trending?api_key=2041494ca782403cb6055682a7943c75&tag=&rating=G`;
 const randomButton = document.querySelector("#getRandomGiphyButton");
 const trendingButton = document.querySelector("#getTrendingButton");
-const body = document.querySelector("body");
 const gif = document.querySelector("#giphyImageTag");
 const title = document.querySelector("#giphyTitleDiv");
 const trendingDiv = document.querySelector("#trending");
@@ -50,7 +49,7 @@ form.addEventListener("submit", handleSearch);
 const handleResponse = (url, title) => {
   gif.setAttribute("src", url);
   resultsHeader.innerText = `${title}`;
-  body.append(gif);
+  randomDiv.append(gif);
 };
 
 const handleRandomClick = () => {
@@ -92,7 +91,7 @@ const handleTrendingClick = () => {
     let randomNumber = Math.floor(Math.random() * 25);
     let trendingGifURL = response.data.data[randomNumber].images.original.url;
     gif.setAttribute("src", trendingGifURL);
-    body.append(gif);
+    trendingDiv.append(gif);
   });
 };
 
